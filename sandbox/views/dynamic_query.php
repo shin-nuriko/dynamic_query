@@ -1,19 +1,36 @@
 <?php //echo print_r($employees)
-if ($employees['sql'] != ''): ?>
+$th = array();
+if (0 < count($employees['basic_info'])) { //get table labels and exclude emp_hidden
+	unset($employees['basic_info'][0]['emp_hidden']);
+	foreach ($employees['basic_info'][0] as $key => $value) {
+		$th[] = $key;
+	}
+}
+
+?>
+<?php if ($employees['sql'] != ''): ?>
 <div class="query">
 	<div class="label">Query used: </div>
 	<div class="sql"><?php echo $employees['sql']; ?></div>
 </div>
 <?php endif ?>
 <div class="result">
-<?php foreach ($employees['basic_info'] as $emp): ?>
+	<table align="center">
+		<tr>
+			<?php foreach ($th as $t): ?>
+			<th><?php echo $t ?></th>
+			<?php endforeach ?>
+		</tr>
+<?php foreach ($employees['basic_info'] as $emp): 
+	unset($emp['emp_hidden']); ?>
 	
-		<div class="employee">  
+		<tr>  
 		<?php foreach ($emp as $key => $value): ?>		
-			<div class="info">  	
-			<?php echo $key  ?>: <?php echo $value  ?> 
-			</div>
+			<td>  	
+				<?php echo $value  ?> 
+			</td>
 		<?php endforeach ?>
-		</div>
+		</tr>
 <?php endforeach ?>
+	</table>
 </div>
