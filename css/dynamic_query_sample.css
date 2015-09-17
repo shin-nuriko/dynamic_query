@@ -21,9 +21,9 @@
 }
 
 .query {
-    margin-top: 30px;
     float: left;
     padding: 15px;
+    max-width: 1120px;
 }
 .query .sql {
     font-family: monospace;
@@ -36,6 +36,7 @@
 
 .result {
     float: left;
+    min-width: 500px;
 }
 .result .employee,
 .query_show .choices {
@@ -60,3 +61,18 @@
     font-weight: bold;
 }
 
+table {
+    font-size: 15px;
+    margin: 15px;
+    padding: 5px;
+    border-spacing: 1px;
+}
+th {
+    background-color: #F0F8FF;
+}
+th,td {
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background: #F5E9F5;
+}
