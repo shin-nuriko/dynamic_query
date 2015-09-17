@@ -12,14 +12,14 @@ class Employees_model extends CI_Model {
 		$query_select = "SELECT concat(employees.last_name, ', ', employees.first_name) as 'Name' ";
 		$query_from = 'employees';
 		$query_filter = '';
+		$salary_query = "SELECT * FROM (select emp_no as emp_hidden FROM salaries where to_date='9999-01-01' ";
+		$salary_filter = '';
 		$result = array();
-
-		//echo print_r($data);
 
 		foreach ($data as $display => $value) {
 			switch ($display) {
 				case 'emp_no':
-					$query_select .= ", employees.emp_no as 'employee no.' ";
+					$query_select .= ", employees.emp_no ";
 					break;
 				case 'birth_date':
 					$query_select .= ", employees.birth_date as 'birthday' ";
@@ -37,11 +37,13 @@ class Employees_model extends CI_Model {
 					break;
 				case 'current_salary':
 					$query_select .= ", salaries.salary as 'current salary'";
-					$query_from .= ", salaries";
+					if (strpos($query_from, 'salaries') === false) {
+						$query_from .= ", salaries";
+					}
 					$query_filter .= " and employees.emp_no = salaries.emp_no and salaries.to_date ='9999-01-01' ";
 					break;
 				case 'department':
-					$query_select .= ", departments.dept_name";
+					$query_select .= ", departments.dept_name as 'department'";
 					if ($data['filter_departments'] == ''){						
 						if (strpos($query_from, 'dept_emp') === false) {
 							$query_from .= ", dept_emp";
@@ -51,6 +53,18 @@ class Employees_model extends CI_Model {
 						}
 						$query_filter .= " and (dept_emp.emp_no = employees.emp_no and dept_emp.dept_no=departments.dept_no and dept_emp.to_date='9999-01-01')";
 					}
+					break;
+				case 'department_manager':
+					$query_select .= ", dept_head.department_head AS  'department manager'";
+					if (strpos($query_from, 'departments') === false) {
+						$query_from .= ", departments";
+					}
+					$query_from .= ", (SELECT CONCAT( employees.last_name,  ', ', employees.first_name ) AS  'department_head', departments.dept_name
+						FROM employees
+						JOIN dept_manager ON employees.emp_no = dept_manager.emp_no
+						JOIN departments ON departments.dept_no = dept_manager.dept_no
+						WHERE dept_manager.to_date =  '9999-01-01') AS dept_head";
+					$query_filter .= ' and departments.dept_name = dept_head.dept_name';
 					break;
 				case 'filter_emp_no':
 					if ($value == '') break;
@@ -77,13 +91,34 @@ class Employees_model extends CI_Model {
 					if ($value == '' or $value == 'both') break;
 					$query_filter .= " and employees.gender='$value'";
 					break;
+				case 'filter_salary_start':
+					if ($value == '0' or $value == '') break;
+					if (FALSE == array_key_exists('emp_no',$data)) {
+						$query_select .= ", employees.emp_no ";
+					}
+					$salary_filter .= " and salary >= '$value'";
+					break;
+				case 'filter_salary_end':
+					if ($value == '0' or $value == '') break;
+					if (FALSE == array_key_exists('emp_no',$data)) {
+						$query_select .= ", employees.emp_no ";
+					}
+					$salary_filter .= " and salary <= '$value'";
+					break;
 				case '':
 					$query_select .= "";
 					break;
 			}
 		}
 
-		$query_string = $query_select . ' FROM ' . $query_from . ' WHERE 1 ' . $query_filter . ' ORDER BY employees.last_name LIMIT 15';
+		$query_string = $query_select . ' FROM ' . $query_from . ' WHERE 1 ' . $query_filter;
+
+		if ($salary_filter !== '') { //join 2 queries
+			$salary_query .= $salary_filter . ") AS sueldo INNER JOIN ($query_string) AS employ ON employ.emp_no=sueldo.emp_hidden";
+			$query_string = $salary_query;
+		}
+
+		$query_string .= ' LIMIT 15';
 
 		$query = $this->db->query($query_string);
 		$result['sql'] = $query_string;

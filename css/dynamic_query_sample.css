@@ -1,8 +1,9 @@
 .criteria,
 .query_show {
-	/*width: 600px;*/
-	margin: 5px;
-	padding: 5px;
+    width: 550px;
+    margin: 5px;
+    padding: 5px;
+    float: left;
 }
 
 .criteria .filter {
@@ -21,6 +22,8 @@
 
 .query {
     margin-top: 30px;
+    float: left;
+    padding: 15px;
 }
 .query .sql {
     font-family: monospace;
@@ -31,6 +34,9 @@
     border: 1px solid rgb(208, 208, 208);
 }
 
+.result {
+    float: left;
+}
 .result .employee,
 .query_show .choices {
 	margin-top: 5px;

@@ -5,8 +5,9 @@ if ($employees['sql'] != ''): ?>
 	<div class="sql"><?php echo $employees['sql']; ?></div>
 </div>
 <?php endif ?>
+<div class="result">
 <?php foreach ($employees['basic_info'] as $emp): ?>
-	<div class="result">
+	
 		<div class="employee">  
 		<?php foreach ($emp as $key => $value): ?>		
 			<div class="info">  	
@@ -14,5 +15,5 @@ if ($employees['sql'] != ''): ?>
 			</div>
 		<?php endforeach ?>
 		</div>
-	</div>
 <?php endforeach ?>
+</div>
