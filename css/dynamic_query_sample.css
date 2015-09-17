@@ -1,0 +1,56 @@
+.criteria,
+.query_show {
+	/*width: 600px;*/
+	margin: 5px;
+	padding: 5px;
+}
+
+.criteria .filter {
+    margin-top: 5px;
+    margin-left: 35px;
+}
+
+.criteria .filter .item .label {
+	width: 200px;
+}
+
+.criteria .filter .item .label,
+.criteria .filter .item .form {
+	float: left;
+}
+
+.query {
+    margin-top: 30px;
+}
+.query .sql {
+    font-family: monospace;
+    font-size: 10pt;
+    margin: 10px;
+    background-color: #eee;
+    padding: 5px;
+    border: 1px solid rgb(208, 208, 208);
+}
+
+.result .employee,
+.query_show .choices {
+	margin-top: 5px;
+	margin-left: 35px;
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+    border-top-style: dotted;
+    border-top-color: #d3d3d3;
+}
+.criteria .filter .item,
+.query_show .choices .item {
+	padding: 2px;
+	margin: 2px;
+}
+
+.buttons .submit {
+	float: right;
+    font-size: 12pt;
+    color: green;
+    font-weight: bold;
+}
+
