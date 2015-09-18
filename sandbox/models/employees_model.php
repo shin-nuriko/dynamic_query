@@ -118,6 +118,10 @@ class Employees_model extends CI_Model {
 			$query_string = $salary_query;
 		}
 
+		if ( isset($data['sort_name']) && $data['sort_name'] == 1) {
+			$query_string .= ' ORDER BY Name';
+		}
+
 		if ($data['limits'] != '') {
 			$query_string .= ' LIMIT '. $data['limits'];
 		}

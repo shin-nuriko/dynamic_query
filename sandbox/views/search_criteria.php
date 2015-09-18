@@ -14,7 +14,7 @@ foreach ($departments as $dep) {
 		<div class='item'>
 			<div class="label">employee id </div> 
 			<div class="input">
-				<input type="text" name="filter_emp_no" value="<?php echo set_value('filter_emp_no', ''); ?>">
+				<input type="number" name="filter_emp_no" value="<?php echo set_value('filter_emp_no', ''); ?>">
 			</div>
 		</div>
 		<div class='item'>
@@ -38,8 +38,8 @@ foreach ($departments as $dep) {
 		<div class='item'>
 			<div class="label">with salary from </div>
 			<div class="input">
-				<input type="text" name="filter_salary_start" value="<?php echo set_value('filter_salary_start', '0'); ?>"> to 
-				<input type="text" name="filter_salary_end" value="<?php echo set_value('filter_salary_end', ''); ?>">
+				<input type="number" name="filter_salary_start" id="filter_salary_start" value="<?php echo set_value('filter_salary_start', '0'); ?>"> to 
+				<input type="number" name="filter_salary_end" id="filter_salary_end" value="<?php echo set_value('filter_salary_end', ''); ?>">
 			</div>
 		</div>
 	</div>
