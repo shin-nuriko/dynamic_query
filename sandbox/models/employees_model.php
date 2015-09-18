@@ -118,7 +118,13 @@ class Employees_model extends CI_Model {
 			$query_string = $salary_query;
 		}
 
-		$query_string .= ' LIMIT 15';
+		if ( isset($data['sort_name']) && $data['sort_name'] == 1) {
+			$query_string .= ' ORDER BY Name';
+		}
+
+		if ($data['limits'] != '') {
+			$query_string .= ' LIMIT '. $data['limits'];
+		}
 
 		$query = $this->db->query($query_string);
 		$result['sql'] = $query_string;
