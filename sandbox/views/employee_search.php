@@ -1,3 +1,11 @@
+<?php
+$limits = array(
+	'15' => '15',
+	'30' => '30',
+	'60' => '60',
+	'100' => '100'
+	);
+?>
 	<div class='query_show'>
 	<div class='label'>Show</div>
 	<div class='choices'>
@@ -32,6 +40,9 @@
 		<div class='item'>
 			<input type="checkbox" name="department_manager" value="1" <?php echo set_checkbox('department_manager', '1'); ?> />
 			department manager
+		</div>
+		<div class='item'>
+			display results <?php echo form_dropdown('limits', $limits); ?>
 		</div>
 	</div>
 	<div class="buttons">

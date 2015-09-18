@@ -118,7 +118,9 @@ class Employees_model extends CI_Model {
 			$query_string = $salary_query;
 		}
 
-		$query_string .= ' LIMIT 15';
+		if ($data['limits'] != '') {
+			$query_string .= ' LIMIT '. $data['limits'];
+		}
 
 		$query = $this->db->query($query_string);
 		$result['sql'] = $query_string;

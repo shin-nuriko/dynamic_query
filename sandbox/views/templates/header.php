@@ -5,3 +5,4 @@
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url(); ?>css/dynamic_query_sample.css">
 </head>
 <body>
+	<div class="dynamic_query">

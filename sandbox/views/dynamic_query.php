@@ -14,6 +14,8 @@ if (0 < count($employees['basic_info'])) { //get table labels and exclude emp_hi
 	<div class="sql"><?php echo $employees['sql']; ?></div>
 </div>
 <?php endif ?>
+<?php if (0 < count($employees['basic_info'])): ?>
+
 <div class="result">
 	<table align="center">
 		<tr>
@@ -21,7 +23,7 @@ if (0 < count($employees['basic_info'])) { //get table labels and exclude emp_hi
 			<th><?php echo $t ?></th>
 			<?php endforeach ?>
 		</tr>
-<?php foreach ($employees['basic_info'] as $emp): 
+	<?php foreach ($employees['basic_info'] as $emp): 
 	unset($emp['emp_hidden']); ?>
 	
 		<tr>  
@@ -31,6 +33,8 @@ if (0 < count($employees['basic_info'])) { //get table labels and exclude emp_hi
 			</td>
 		<?php endforeach ?>
 		</tr>
-<?php endforeach ?>
+	<?php endforeach ?>
 	</table>
 </div>
+
+<?php endif ?>
